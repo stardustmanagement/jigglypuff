@@ -53,6 +53,7 @@ class AddProduct extends Component {
   submitProduct() {
     //Invoke action creator - in progress (working with redux)
     //We need to get userID from Redux store and add that as well
+    //userId: this.props.userId
     this.props.addProduct({
       productName: this.state.productName,
       productDesc: this.state.productDesc,
