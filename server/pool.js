@@ -10,7 +10,7 @@ const pool = new Pool({
   port: DB_PORT,
   max: DB_MAX_CONNECTIONS,
   idleTimeoutMillis: 30000,
-  _connectionTimeoutMillis: 2000,
+  _connectionTimeoutMillis: 2000
 });
 
 module.exports = pool;
