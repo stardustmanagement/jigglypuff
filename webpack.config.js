@@ -1,41 +1,40 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require("path");
+const webpack = require("webpack");
 
-const NODE_DEV_SERVER_URL = `http://localhost:${process.env.PORT}`;
+// const NODE_DEV_SERVER_URL = `http://localhost:${process.env.PORT}`;
+const NODE_DEV_SERVER_URL = `http://localhost:3000`;
 
 module.exports = {
-  entry: path.resolve(__dirname, 'client/index'),
+  entry: path.resolve(__dirname, "client/index"),
   output: {
-    path: path.resolve(__dirname, 'client/dist'),
-    publicPath: '/',
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "client/dist"),
+    publicPath: "/",
+    filename: "bundle.js"
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ["babel-loader"]
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loaders: ['style-loader', 'css-loader']
+        loaders: ["style-loader", "css-loader"]
       }
-    ],
+    ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ["*", ".js", ".jsx"]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     contentBase: `${__dirname}/client/dist`,
     hot: true,
     proxy: {
-      '/api': NODE_DEV_SERVER_URL,
-      '/static': NODE_DEV_SERVER_URL,
-    },
-  },
+      "/api": NODE_DEV_SERVER_URL,
+      "/static": NODE_DEV_SERVER_URL
+    }
+  }
 };
