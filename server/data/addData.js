@@ -1,10 +1,9 @@
-const pool = require('../pool');
+const pool = require("../pool");
 if (pool.totalCount > 0) {
-  console.warn('totalConnections from the pool should be 0');
+  console.warn("totalConnections from the pool should be 0");
   process.exitCode = 1;
   return;
 }
-
 
 const DROP_TABLES = `DROP TABLE "Category", "Product";`;
 
@@ -44,8 +43,8 @@ const dropTables = () => {
     pool.query(DROP_TABLES, (err, result) => {
       if (err) reject(err);
       resolve(result);
-    })
-  })
+    });
+  });
 };
 
 const createCategory = () => {
@@ -53,18 +52,17 @@ const createCategory = () => {
     pool.query(CREATE_CATEGORY, (err, result) => {
       if (err) reject(err);
       resolve(result);
-    })
-  })
+    });
+  });
 };
 
 const insertCategory = () => {
   return new Promise((resolve, reject) => {
     pool.query(INSERT_CATEGORY, (err, result) => {
       if (err) reject(err);
-      resolve(result)
-    })
-  }
-  )
+      resolve(result);
+    });
+  });
 };
 
 const createProduct = () => {
@@ -72,8 +70,8 @@ const createProduct = () => {
     pool.query(CREATE_PRODUCT, (err, result) => {
       if (err) reject(err);
       resolve(result);
-    })
-  })
+    });
+  });
 };
 
 const insertProduct = () => {
@@ -81,10 +79,9 @@ const insertProduct = () => {
     pool.query(INSERT_PRODUCT, (err, result) => {
       if (err) reject(err);
       resolve(result);
-    })
-  })
+    });
+  });
 };
-
 
 dropTables()
   .then(createCategory)
@@ -92,10 +89,10 @@ dropTables()
   .then(createProduct)
   .then(insertProduct)
   .then(() => {
-    console.log('Successfuly reseted the data');
+    console.log("Successfuly reseted the data");
     return pool.end();
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err);
     return pool.end();
   });
