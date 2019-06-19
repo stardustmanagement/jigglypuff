@@ -1,7 +1,7 @@
-import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS, REQUEST_PRODUCTS_FAILURE, ADD_TO_CART, SUBTRACT_FROM_CART, PROCEED_TO_CHECKOUT, EXIT_CHECKOUT, ACCEPT_PURCHASE, REQUEST_PURCHASE } from '../constants/actionTypes';
+import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS, REQUEST_PRODUCTS_FAILURE, ADD_TO_CART, SUBTRACT_FROM_CART, PROCEED_TO_CHECKOUT, EXIT_CHECKOUT, ACCEPT_PURCHASE, REQUEST_PURCHASE, ADD_PRODUCT } from '../constants/actionTypes';
 
 const initialState = {
-  products: [{name: 'dummy'}, { name: 'shoe'}],
+  products: [],
   totalItemsInCart: 0,
   fetchProductsStatus: '',
   fetchProductsError: '',
@@ -76,6 +76,11 @@ const productsReducer = (state = initialState, action) => {
         sendPurchaseStatus: action.payload,
         totalItemsInCart: 0,
         cart: {},
+      }
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        products: [action.payload, ...state.products]
       }
     default:
       return state;

@@ -81,3 +81,8 @@ export const acceptPurchase = (resMsg) => dispatch => {
     payload: resMsg,
   });
 }
+
+export const addProduct = (product) => ({
+  type: types.ADD_PRODUCT,
+  payload: product
+})
