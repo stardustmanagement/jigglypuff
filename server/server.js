@@ -34,7 +34,9 @@ app.get(
 );
 
 // callback method for data (redirect), must be configured on Google Console. 
-app.get("/auth/google/callback", passport.authenticate("google"));
+app.get("/auth/google/callback", passport.authenticate("google"), (req, res) => {
+  console.log(`this is the res.body: ${res.body}`);
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
