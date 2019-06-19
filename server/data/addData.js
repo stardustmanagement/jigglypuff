@@ -5,6 +5,7 @@ if (pool.totalCount > 0) {
   return;
 }
 
+
 const DROP_TABLES = `DROP TABLE "users", "products";`;
 
 // new table: users
@@ -47,6 +48,8 @@ const createUsers = () => {
     });
   });
 };
+
+
 
 const createProduct = () => {
   return new Promise((resolve, reject) => {
