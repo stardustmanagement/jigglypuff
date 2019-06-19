@@ -24,7 +24,7 @@ passport.use(
     }
   )
 );
-
+// route to auth/google at localhost:3000/auth/google -> redirects to google login
 app.get(
   "/auth/google",
   passport.authenticate("google", {
@@ -32,6 +32,7 @@ app.get(
   })
 );
 
+// callback method for data (redirect), must be configured on Google Console. 
 app.get("/auth/google/callback", passport.authenticate("google"));
 
 app.use(bodyParser.json());
