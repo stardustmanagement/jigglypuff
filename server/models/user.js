@@ -7,7 +7,7 @@ userModel = {
     //     VALUES ('${body.u_id}','${body.prod_name}','${body.prod_desc}','${
     //   body.prod_price
     // }','${body.img_url}','${body.stock}','${body.zip}','${body.loc}')`;
-
+    console.log('Body: ', body);
     const newProductQuery = `INSERT INTO products (u_id,prod_name,prod_desc,prod_price,img_url,stock,zipcode,location) VALUES (
       $1,
       $2,

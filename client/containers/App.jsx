@@ -15,17 +15,23 @@ class App extends Component{
   }
   //Make fetch call to api/current_user, and update state if it returns current user id
   componentDidMount(){
-    fetch('http://localhost:3000/api/current_user')
+    console.log('Requesting user id from server');
+    fetch('/api/current_user', {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Access-Control-Allow-Credentials": true
+      }
+    })
       .then(res => {
-        console.log('Before calling JSON on the res', res);
-        res.json();
+        return res.json();
       })
       .then(data => {
         console.log('Response', data);
         this.props.addUser(data);
       }).catch(err => {
         console.log(`error response: ${err}`);
-        
       }); 
   }
 
