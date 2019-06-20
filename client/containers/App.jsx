@@ -5,11 +5,13 @@ import Footer from '../components/Footer'
 import PurchaseModal from './PurcasheModal';
 import AddProduct from './AddProduct';
 import { connect } from "react-redux";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const mapStateToProps = store => ({
   onCheckoutPage: store.products.onCheckoutPage,
 })
 
+//wire-up Router in here
 function App({ onCheckoutPage }) {
   return (
     <div>
