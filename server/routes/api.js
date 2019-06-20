@@ -7,10 +7,15 @@ router.get('/products', productCtrl.getAllProducts, (req, res) => {
   res.status(200).json(res.locals.products)
 });
 
-// Get all products in specific category
-router.get('/products/:category', productCtrl.getCategory, (req, res) => {
-  res.status(200).json(res.locals.category)
+//Get all products published by a specific user (if id is sent as part of query string)
+router.get('/products/:userId', productCtrl.getUserProducts, (req, res) => {
+  res.status(200).json(res.locals.products);
 });
+
+// Get all products in specific category
+// router.get('/products/:category', productCtrl.getCategory, (req, res) => {
+//   res.status(200).json(res.locals.category)
+// });
 
 // Post route to update inventory upon clicking purchase button
 router.post('/purchase', productCtrl.updateInventory, (req, res) => {

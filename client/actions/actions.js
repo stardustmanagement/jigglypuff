@@ -9,6 +9,7 @@ export const receiveProducts = (json) => ({
   payload: json,
 })
 
+
 /**
  * Dispatch this in case of receiving invalid data or the request fails
  * @param {*} err error object
@@ -81,3 +82,8 @@ export const acceptPurchase = (resMsg) => dispatch => {
     payload: resMsg,
   });
 }
+
+export const addProduct = (product) => ({
+  type: types.ADD_PRODUCT,
+  payload: product
+})
