@@ -11,6 +11,7 @@ const initialState = {
   onCheckoutPage: false,
   sendPurchaseStatus: '',
   sendPurchaseError: '',
+  isAuthenticated: false
 }
 
 const productsReducer = (state = initialState, action) => {
