@@ -17,6 +17,7 @@ function Header(props) {
   return (
     <header>
       <div className='header-left'>
+        {/* <LockIcon></LockIcon> */}
         <h1>DrewsList</h1>
       </div>
       <div className='header-right'>

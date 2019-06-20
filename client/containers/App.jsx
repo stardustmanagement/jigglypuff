@@ -1,16 +1,16 @@
-import React from 'react';
-import Header from './Header';
-import MainDisplay from '../components/MainDisplay'
-import Footer from '../components/Footer'
-import PurchaseModal from './PurcasheModal';
-import AddProduct from './AddProduct';
-import UserCatalog from './UserCatalog';
+import React from "react";
+import Header from "./Header";
+import MainDisplay from "../components/MainDisplay";
+import Footer from "../components/Footer";
+import PurchaseModal from "./PurcasheModal";
+import AddProduct from "./AddProduct";
+import UserCatalog from "./UserCatalog";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const mapStateToProps = store => ({
-  onCheckoutPage: store.products.onCheckoutPage,
-})
+  onCheckoutPage: store.products.onCheckoutPage
+});
 
 //wire-up Router in here
 function App({ onCheckoutPage }) {
@@ -18,10 +18,13 @@ function App({ onCheckoutPage }) {
     <Router>
       <div>
         <Header />
-        <Link to="/">Store</Link>
-        <Link to="/addproduct">Add Product</Link>
-        <Link to="/myproducts">My Products</Link>
-
+        <div className="tabs">
+          <Link to="/">Store</Link>
+          <Link to="/addproduct" className="addproduct">
+            Add Product
+          </Link>
+          <Link to="/myproducts">My Products</Link>
+        </div>
         {onCheckoutPage && <PurchaseModal />}
 
         <Route exact path="/" component={MainDisplay} />
