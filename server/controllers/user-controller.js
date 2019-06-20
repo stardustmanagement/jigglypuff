@@ -12,7 +12,8 @@ userCtrl.createNewUser = (req, res) => {};
 // middleware to return only the user's items for crud operations
 userCtrl.getMyProducts = (req, res) => {};
 // middleware to allow users to add products with corresponding u_id
-userCtrl.addNewProduct = (req, res) => {
+userCtrl.addNewProduct = (req, res, next) => {
+  console.log('In controller: ', req.body);
   User.newProduct(req.body)
     .then(result => {
       res.locals.success = "Product successfully added"

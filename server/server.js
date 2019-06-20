@@ -8,9 +8,19 @@ const keys = require("./config/keys");
 const path = require("path");
 const bodyParser = require("body-parser");
 const routes = require("./routes/api");
+var cors = require('cors');
 const { PORT } = process.env;
 
 const pool = require("./pool");
+
+
+app.use(
+  cors({
+    origin: "true", // allow to server to accept request from different origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true // allow session cookie from browser to pass through
+  })
+);
 
 app.use(
   cookieSession({
@@ -70,6 +80,7 @@ passport.use(
   )
 );
 
+
 // route to auth/google at localhost:3000/auth/google -> redirects to google login
 app.get(
   "/auth/google",
@@ -84,13 +95,16 @@ app.get("/auth/google/callback", passport.authenticate("google"), (req, res) => 
   res.redirect("http://localhost:8080");
 });
 
+app.get("/api/current_user", (req, res) => {
+  console.log('In server - fetching user ID: ', req.user.rows[0].user_id);
+  res.locals.currentUserId = req.user.rows[0].user_id;
+  res.json(res.locals.currentUserId);
+  // res.json(req.user.rows[0].user_id);
+});
+
 app.get("/api/logout", (req, res) => {
   req.logout();
   res.send(req.user);
-});
-
-app.get("/api/current_user", (req, res) => {
-  res.send(req.user.rows[0].user_id);
 });
 
 app.use(bodyParser.json());

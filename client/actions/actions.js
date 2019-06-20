@@ -89,16 +89,19 @@ export const addProduct = (product) => ({
 })
 
 export const sendProduct = (product) => dispatch => {
-  return fetch('/api/products/add', {
+  console.log('Before sending: ', product);
+  return fetch('/api/newproduct', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(product)
   })
-  .then(res => res.json())
-  .then(res => {
-    return dispatch(addProduct(product))
-  })
+  .then(res => dispatch(addProduct(product)))
   .catch(err => console.log(err));
 }
+
+export const addUser = (userId) => ({
+  type: types.ADD_USER,
+  payload: userId
+})
