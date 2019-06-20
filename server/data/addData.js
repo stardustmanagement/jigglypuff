@@ -21,6 +21,7 @@ const CREATE_USER_TABLE = `CREATE TABLE users (
 // table products
 // u_id, prod_name, prod_desc, prod_price, img_url, stock, zipcode, location
 const CREATE_PRODUCTS_TABLE = `CREATE TABLE products (
+  _id SERIAL PRIMARY KEY,
   u_id TEXT REFERENCES users(user_id) NOT NULL,
   prod_name TEXT NOT NULL,
   prod_desc TEXT NOT NULL, 

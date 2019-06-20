@@ -80,9 +80,13 @@ app.get(
 
 // callback method for data (redirect), must be configured on Google Console.
 // needs to be configured soon
-app.get("/auth/google/callback", passport.authenticate("google"), (req, res) => {
-  res.redirect("http://localhost:8080");
-});
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google"),
+  (req, res) => {
+    res.redirect("http://localhost:8080");
+  }
+);
 
 app.get("/api/logout", (req, res) => {
   req.logout();
