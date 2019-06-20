@@ -7,18 +7,10 @@ function NavBar() {
   }
   return (
     <ul className="navbar">
-      <li>
-        <a href="Home">Home</a>
-      </li>
-      <li>
-        <a href="Purchase">Purchase</a>
-      </li>
-      <li>
-        {/* <a href="Login">Login</a> */}
+        <p className="home">HOME</p>
         <button onClick={login} type="submit" className="login_button">
           Login
         </button>
-      </li>
     </ul>
   );
 }

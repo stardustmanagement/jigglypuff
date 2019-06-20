@@ -15,16 +15,17 @@ const mapDispatchToProps = dispatch => ({
 
 function Header(props) {
   return (
-    <header>
+    <div>
       <div className='header-left'>
-        {/* <LockIcon></LockIcon> */}
-        <h1>DrewsList</h1>
+        <h1 className='title'>KIM's Convenience</h1>
       </div>
-      <div className='header-right'>
-        <NavBar />
-        <CartBtn proceedToCheckout={props.proceedToCheckout} totalItemsInCart={props.totalItemsInCart} />
-      </div>
-    </header>
+      <header>
+        <div className='header-right'>
+          <NavBar />
+          <CartBtn proceedToCheckout={props.proceedToCheckout} totalItemsInCart={props.totalItemsInCart} />
+        </div>
+      </header>
+    </div>
   );
 }
 
