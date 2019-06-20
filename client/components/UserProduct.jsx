@@ -1,13 +1,13 @@
 /**
-* ************************************
-*
-* @module UserProduct.jsx
-* @author Stardust
-* @date 06/19/2019
-* @description Only renders the user's own products, allowing them to delete or edit (stretch) their own products.
-*
-* ************************************
-*/
+ * ************************************
+ *
+ * @module UserProduct.jsx
+ * @author Stardust
+ * @date 06/19/2019
+ * @description Only renders the user's own products, allowing them to delete or edit (stretch) their own products.
+ *
+ * ************************************
+ */
 
 import React, { Component } from "react";
 
@@ -21,11 +21,7 @@ const UserProduct = props => {
     .map((product, idx) => {
       return (
         <div key={idx}>
-          <img
-            src={product.imageURL}
-            width="45%"
-            height="45%"
-          />
+          <img src={product.imageURL} width="45%" height="45%" />
           <div>Item: {product.productName}</div>
           <div>Description: {product.productDesc}</div>
           <div>$: {product.productPrice}</div>
@@ -33,11 +29,7 @@ const UserProduct = props => {
       );
     });
 
-  return (
-    <div>
-      {filteredUserProducts}
-    </div>
-  );
+  return <div>{filteredUserProducts}</div>;
 };
 
 export default UserProduct;
