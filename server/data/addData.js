@@ -28,7 +28,7 @@ const CREATE_PRODUCTS_TABLE = `CREATE TABLE products (
   img_url TEXT NOT NULL,
   stock BOOLEAN,
   zipcode TEXT,
-  location TEXT,
+  location TEXT
 );`;
 
 const dropTables = () => {

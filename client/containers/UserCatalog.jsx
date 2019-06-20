@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import UserProduct from '../components/UserProduct';
 import * as actions from "../actions/actions";
 
+
 class UserCatalog extends Component {
   constructor(){
     super();
