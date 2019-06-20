@@ -1,4 +1,4 @@
-import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS, REQUEST_PRODUCTS_FAILURE, ADD_TO_CART, SUBTRACT_FROM_CART, PROCEED_TO_CHECKOUT, EXIT_CHECKOUT, ACCEPT_PURCHASE, REQUEST_PURCHASE, ADD_PRODUCT } from '../constants/actionTypes';
+import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS, REQUEST_PRODUCTS_FAILURE, ADD_TO_CART, SUBTRACT_FROM_CART, PROCEED_TO_CHECKOUT, EXIT_CHECKOUT, ACCEPT_PURCHASE, REQUEST_PURCHASE, ADD_PRODUCT, ADD_USER } from '../constants/actionTypes';
 
 const initialState = {
   products: [],
@@ -84,6 +84,12 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         products: [action.payload, ...state.products]
+      }
+    case ADD_USER:
+      return {
+        ...state,
+        userId: action.payload,
+        isAuthenticated: true
       }
     default:
       return state;

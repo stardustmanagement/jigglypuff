@@ -9,3 +9,4 @@ export const REQUEST_PURCHASE = 'REQUEST_PURCHASE';
 export const ACCEPT_PURCHASE = 'ACCEPT_PURCHASE';
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const ADD_USER = 'ADD_USER';
