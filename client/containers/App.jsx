@@ -15,7 +15,7 @@ class App extends Component{
   }
   //Make fetch call to api/current_user, and update state if it returns current user id
   componentDidMount(){
-    fetch('/api/current_user')
+    fetch('http://localhost:3000/api/current_user')
       .then(res => {
         console.log('Before calling JSON on the res', res);
         res.json();

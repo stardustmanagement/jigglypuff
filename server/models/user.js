@@ -3,14 +3,37 @@ userModel = {
   // add a product to products database
   // json body: { "u_id":"value", "prod_name":"value", "prod_desc":"value" }
   newProduct(body) {
-    const newProductQuery = `INSERT INTO "public"."products" (u_id,prod_name,prod_desc,prod_price,img_url,stock,zipcode,location)
-        VALUES ('${body.u_id}','${body.prod_name}','${body.prod_desc}','${
-      body.prod_price
-    }','${body.img_url}','${body.stock}','${body.zip}','${body.loc}')`;
+    // const newProductQuery = `INSERT INTO "public"."products" (u_id,prod_name,prod_desc,prod_price,img_url,stock,zipcode,location)
+    //     VALUES ('${body.u_id}','${body.prod_name}','${body.prod_desc}','${
+    //   body.prod_price
+    // }','${body.img_url}','${body.stock}','${body.zip}','${body.loc}')`;
+
+    const newProductQuery = `INSERT INTO products (u_id,prod_name,prod_desc,prod_price,img_url,stock,zipcode,location) VALUES (
+      $1,
+      $2,
+      $3,
+      $4,
+      $5,
+      $6,
+      $7,
+      $8
+    )`;
+
+    const values = [
+      body.u_id,
+      body.prod_name,
+      body.prod_desc,
+      body.prod_price,
+      body.img_url, 
+      null,
+      null,
+      null
+    ]
+
     return new Promise((resolve, reject) => {
-      pool.query(newProductQuery, (err, result) => {
+      pool.query(newProductQuery, values, (err, result) => {
         if (err) return reject(err);
-        resolve(reject);
+        resolve(result);
       });
     });
   },
