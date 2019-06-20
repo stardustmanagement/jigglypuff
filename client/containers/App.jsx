@@ -19,11 +19,10 @@ function App({ onCheckoutPage }) {
       <div>
         <Header />
         <div className="tabs">
-          <Link to="/">Store</Link>
           <Link to="/addproduct" className="addproduct">
             Add Product
           </Link>
-          <Link to="/myproducts">My Products</Link>
+          <Link to="/myproducts" className="myproduct">My Products</Link>
         </div>
         {onCheckoutPage && <PurchaseModal />}
 
@@ -31,7 +30,7 @@ function App({ onCheckoutPage }) {
         <Route path="/addproduct" component={AddProduct} />
         <Route path="/myproducts" component={UserCatalog} />
 
-        <Footer />
+  
       </div>
     </Router>
   );
