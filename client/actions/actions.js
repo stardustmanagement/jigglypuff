@@ -87,3 +87,18 @@ export const addProduct = (product) => ({
   type: types.ADD_PRODUCT,
   payload: product
 })
+
+export const sendProduct = (product) => dispatch => {
+  return fetch('/api/products/add', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(product)
+  })
+  .then(res => res.json())
+  .then(res => {
+    return dispatch(addProduct(product))
+  })
+  .catch(err => console.log(err));
+}
