@@ -2,6 +2,7 @@ import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS, REQUEST_PRODUCTS_FAILURE, ADD_TO_CA
 
 const initialState = {
   products: [],
+  userId: '',
   totalItemsInCart: 0,
   fetchProductsStatus: '',
   fetchProductsError: '',
@@ -39,6 +40,7 @@ const productsReducer = (state = initialState, action) => {
         totalItemsInCart: state.totalItemsInCart + 1,
         cart: Object.assign(state.cart, { [SKU]: newQuantity })
       }
+
     case SUBTRACT_FROM_CART:
       SKU = action.payload;
       product = Object.values(state.products).filter(p => p.SKU == SKU)[0];
