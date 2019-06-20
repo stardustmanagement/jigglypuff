@@ -70,11 +70,12 @@ class AddProduct extends Component {
     //   prod_price: this.state.productPrice,
     //   img_url: this.state.imageURL
     // });
+    console.log('type of price: ', typeof this.state.productPrice)
     this.props.sendProduct({
       u_id: this.props.userId,
       prod_name: this.state.productName,
       prod_desc: this.state.productDesc,
-      prod_price: this.state.productPrice,
+      prod_price: Number(this.state.productPrice),
       img_url: this.state.imageURL
     })
     document.getElementById("product-form").reset();
