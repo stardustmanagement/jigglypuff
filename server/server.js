@@ -21,8 +21,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// returns user id
 passport.serializeUser((user, done) => {
-  console.log("USER", user);
+  // console.log("USER", user);
   done(null, user.rows[0]._id);
 });
 
@@ -77,7 +78,10 @@ app.get(
 );
 
 // callback method for data (redirect), must be configured on Google Console.
-app.get("/auth/google/callback", passport.authenticate("google"));
+app.get("/auth/google/callback", passport.authenticate("google"), (req, res) => {
+  // testing re-direct to homepage
+  res.redirect('http://localhost:8080')
+});
 
 app.get("/api/logout", (req, res) => {
   req.logout();
@@ -85,12 +89,13 @@ app.get("/api/logout", (req, res) => {
 });
 
 app.get("/api/current_user", (req, res) => {
-  res.send(req.user);
+  res.send(req.user.rows[0].user_id);
 });
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Static route to access images hosted in server
 app.use("/static", express.static(path.join(__dirname, "public")));
