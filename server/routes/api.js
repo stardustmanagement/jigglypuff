@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productCtrl = require('../controllers/product-controller');
+const userCtrl = require('../controllers/user-controller');
 
 // Get all products
 router.get('/products', productCtrl.getAllProducts, (req, res) => {
@@ -10,6 +11,11 @@ router.get('/products', productCtrl.getAllProducts, (req, res) => {
 //Get all products published by a specific user (if id is sent as part of query string)
 router.get('/products/:userId', productCtrl.getUserProducts, (req, res) => {
   res.status(200).json(res.locals.products);
+});
+
+//Add product to database
+router.get('/products/add', userCtrl.addNewProduct, (req, res) => {
+  res.status(200).send('SUCCESSFUL ADD');
 });
 
 // Get all products in specific category
