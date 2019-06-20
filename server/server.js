@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require("dotenv").config();
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
@@ -78,10 +79,7 @@ app.get(
 );
 
 // callback method for data (redirect), must be configured on Google Console.
-app.get("/auth/google/callback", passport.authenticate("google"), (req, res) => {
-  // testing re-direct to homepage
-  res.redirect('http://localhost:8080')
-});
+app.get("/auth/google/callback", passport.authenticate("google"));
 
 app.get("/api/logout", (req, res) => {
   req.logout();
@@ -92,10 +90,8 @@ app.get("/api/current_user", (req, res) => {
   res.send(req.user.rows[0].user_id);
 });
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 // Static route to access images hosted in server
 app.use("/static", express.static(path.join(__dirname, "public")));
