@@ -1,4 +1,6 @@
 const express = require("express");
+const app = express();
+const cookieSession = require("cookie-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("./config/keys");
@@ -9,7 +11,28 @@ const { PORT } = process.env;
 
 const pool = require("./pool");
 
-const app = express();
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+  console.log("USER", user);
+  done(null, user.rows[0]._id);
+});
+
+passport.deserializeUser((id, done) => {
+  pool
+    .query(`SELECT _id, user_id, name, usr_pic FROM users where _id = '${id}';`)
+    .then(user => {
+      done(null, user);
+    });
+});
 
 // creates new instance of Google Strategy
 // generic register for passport.use
@@ -21,18 +44,30 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
-      // new Pool({ user: profile.id });
-      pool.query(`INSERT INTO users(user_id, name, usr_pic, email) VALUES (
-          '${profile.id}',
-          '${profile.displayName}',
-          '${profile.photos[0].value}', 
-          '${profile.emails[0].value}');`);
-      console.log("access token", accessToken);
-      console.log("refresh token", refreshToken);
-      console.log("profile:", profile);
+      pool
+        .query(`SELECT * FROM users WHERE user_id = '${profile.id}';`)
+        .then(existingUser => {
+          if (existingUser.rows[0]) {
+            done(null, existingUser);
+          } else {
+            pool
+              .query(
+                `INSERT INTO users(user_id, name, usr_pic, email) VALUES (
+              '${profile.id}',
+              '${profile.displayName}',
+              '${profile.photos[0].value}', 
+              '${profile.emails[0].value}');`
+              )
+              .then(user => done(null, user));
+            // console.log("access token", accessToken);
+            // console.log("refresh token", refreshToken);
+            // console.log("profile:", profile);
+          }
+        });
     }
   )
 );
+
 // route to auth/google at localhost:3000/auth/google -> redirects to google login
 app.get(
   "/auth/google",
@@ -43,6 +78,15 @@ app.get(
 
 // callback method for data (redirect), must be configured on Google Console.
 app.get("/auth/google/callback", passport.authenticate("google"));
+
+app.get("/api/logout", (req, res) => {
+  req.logout();
+  res.send(req.user);
+});
+
+app.get("/api/current_user", (req, res) => {
+  res.send(req.user);
+});
 
 
 app.use(bodyParser.json());
