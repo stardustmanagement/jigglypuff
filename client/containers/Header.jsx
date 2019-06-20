@@ -17,7 +17,7 @@ function Header(props) {
   return (
     <header>
       <div className='header-left'>
-        <h1>SNiX</h1>
+        <h1>DrewsList</h1>
       </div>
       <div className='header-right'>
         <NavBar />
