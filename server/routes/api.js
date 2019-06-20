@@ -14,7 +14,7 @@ router.get('/products/:userId', productCtrl.getUserProducts, (req, res) => {
 });
 
 //Add product to database
-router.get('/products/add', userCtrl.addNewProduct, (req, res) => {
+router.post('/newproduct', userCtrl.addNewProduct, (req, res) => {
   res.status(200).send('SUCCESSFUL ADD');
 });
 
