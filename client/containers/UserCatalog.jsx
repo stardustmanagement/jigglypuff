@@ -23,6 +23,7 @@ class UserCatalog extends Component {
   render(){
     return (
       <div>
+        <h1>Your Products</h1>
         <UserProduct products={this.props.products} userId={this.props.userId} />
       </div>
     );
