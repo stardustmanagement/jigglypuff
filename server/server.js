@@ -88,6 +88,7 @@ app.get("/api/current_user", (req, res) => {
   res.send(req.user);
 });
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

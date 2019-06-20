@@ -1,3 +1,14 @@
+/**
+* ************************************
+*
+* @module AddProducts.jsx
+* @author Stardust
+* @date 06/19/2019
+* @description Component that allows users to add their own product. 
+*
+* ************************************
+*/
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions/actions";
@@ -51,13 +62,13 @@ class AddProduct extends Component {
     submitProduct - handles form submission | invokes action creator to send product information to redux store and DB
   */
   submitProduct() {
-    //Invoke action creator - in progress (working with redux)
-    //We need to get userID from Redux store and add that as well
+    //userId: this.props.userId
     this.props.addProduct({
-      productName: this.state.productName,
-      productDesc: this.state.productDesc,
-      productPrice: this.state.productPrice,
-      imageURL: this.state.imageURL
+      u_id: this.props.userId,
+      prod_name: this.state.productName,
+      prod_desc: this.state.productDesc,
+      prod_price: this.state.productPrice,
+      img_url: this.state.imageURL
     });
 
     document.getElementById("product-form").reset();
@@ -126,11 +137,15 @@ class AddProduct extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  userId: state.products.userId
+});
+
 const mapDispatchToProps = dispatch => ({
   addProduct: product => dispatch(actions.addProduct(product))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AddProduct);

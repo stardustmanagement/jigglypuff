@@ -84,4 +84,4 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
-keys.js
+server/config/keys.js
