@@ -1,101 +1,73 @@
-const pool = require('../pool');
+const pool = require("../pool");
 if (pool.totalCount > 0) {
-  console.warn('totalConnections from the pool should be 0');
+  console.warn("totalConnections from the pool should be 0");
   process.exitCode = 1;
   return;
 }
 
 
-const DROP_TABLES = `DROP TABLE "Category", "Product";`;
+const DROP_TABLES = `DROP TABLE "users", "products";`;
 
-const CREATE_CATEGORY = `CREATE TABLE "Category" (
-  "category_id" integer NOT NULL,
-  "category_name" varchar(255) NOT NULL,
-  PRIMARY KEY ("category_id"));`;
+// new table: users
+// _id SERIAL, user_id, name, usr_pic, email
+const CREATE_USER_TABLE = `CREATE TABLE users (
+  _id SERIAL PRIMARY KEY,
+  user_id TEXT UNIQUE,
+  name TEXT,
+  usr_pic TEXT,
+  email TEXT
+);`;
 
-const INSERT_CATEGORY = `INSERT INTO "Category" ("category_id", "category_name") VALUES 
-  (1, 'Adidas'),
-  (2, 'Nike'),
-  (3, 'Puma'),
-  (4, 'Air Jordan'),
-  (5, 'Off-White');`;
-
-const CREATE_PRODUCT = `CREATE TABLE "Product" (
-  "SKU" serial,
-  "category_id" int4 REFERENCES "Category"("category_id"),
-  "product_name" varchar(255) NOT NULL,
-  "size" int2 NOT NULL,
-  "inventory" int8 NOT NULL,
-  "price" decimal NOT NULL,
-  PRIMARY KEY ("SKU"));`;
-
-const INSERT_PRODUCT = `INSERT INTO "Product" ("category_id", "product_name", "size", "inventory", "price") VALUES 
-  ((SELECT "category_id" FROM "Category" WHERE "category_name"='Off-White'), '2.0 Distressed Suede-Trimmed Leather Sneakers', 9, 3, 470),
-  ((SELECT "category_id" FROM "Category" WHERE "category_name"='Nike'), '+ Fear of God Nubuck, Suede and Canvas High-Top Sneakers', 9, 2, 190),
-  ((SELECT "category_id" FROM "Category" WHERE "category_name"='Adidas'), 'A.R. Leather Sneakers', 11, 13, 100),
-  ((SELECT "category_id" FROM "Category" WHERE "category_name"='Air Jordan'), 'Jordan 11 Retro Concord (2018)', 12, 18, 259),
-  ((SELECT "category_id" FROM "Category" WHERE "category_name"='Off-White'), 'Leather-Trimmed Shell And Suede Sneakers', 10, 4, 605),
-  ((SELECT "category_id" FROM "Category" WHERE "category_name"='Nike'), 'Air Max 720 Suede-Trimmed Mesh Sneakers', 8, 6, 190),
-  ((SELECT "category_id" FROM "Category" WHERE "category_name"='Puma'), 'Thunder Rive Dr Glacier Sneakers', 7, 8, 120),
-  ((SELECT "category_id" FROM "Category" WHERE "category_name"='Adidas'), 'Yeezy Boost 700 Suede, Leather and Mesh Sneakers', 10, 4, 300);`;
+// table products
+// u_id, prod_name, prod_desc, prod_price, img_url, stock, zipcode, location
+const CREATE_PRODUCTS_TABLE = `CREATE TABLE products (
+  u_id TEXT REFERENCES users(user_id) NOT NULL,
+  prod_name TEXT NOT NULL,
+  prod_desc TEXT NOT NULL, 
+  prod_price INTEGER NOT NULL,
+  img_url TEXT NOT NULL,
+  stock BOOLEAN,
+  zipcode TEXT,
+  location TEXT,
+);`;
 
 const dropTables = () => {
   return new Promise((resolve, reject) => {
     pool.query(DROP_TABLES, (err, result) => {
       if (err) reject(err);
       resolve(result);
-    })
-  })
+    });
+  });
 };
 
-const createCategory = () => {
-  return new Promise((resolve, reject) => {
-    pool.query(CREATE_CATEGORY, (err, result) => {
+const createUsers = () => {
+  return new Promise((resolve, rejet) => {
+    pool.query(CREATE_USER_TABLE, (err, result) => {
       if (err) reject(err);
       resolve(result);
-    })
-  })
+    });
+  });
 };
 
-const insertCategory = () => {
-  return new Promise((resolve, reject) => {
-    pool.query(INSERT_CATEGORY, (err, result) => {
-      if (err) reject(err);
-      resolve(result)
-    })
-  }
-  )
-};
+
 
 const createProduct = () => {
   return new Promise((resolve, reject) => {
-    pool.query(CREATE_PRODUCT, (err, result) => {
+    pool.query(CREATE_PRODUCTS_TABLE, (err, result) => {
       if (err) reject(err);
       resolve(result);
-    })
-  })
+    });
+  });
 };
-
-const insertProduct = () => {
-  return new Promise((resolve, reject) => {
-    pool.query(INSERT_PRODUCT, (err, result) => {
-      if (err) reject(err);
-      resolve(result);
-    })
-  })
-};
-
 
 dropTables()
-  .then(createCategory)
-  .then(insertCategory)
+  .then(createUsers)
   .then(createProduct)
-  .then(insertProduct)
   .then(() => {
-    console.log('Successfuly reseted the data');
+    console.log("DATA RESET COMPLETE");
     return pool.end();
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err);
     return pool.end();
   });
