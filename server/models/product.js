@@ -9,7 +9,6 @@ const GET_USER_PRODUCTS = `SELECT * FROM products INNER JOIN users ON users.user
 
 const GET_ALL_PRODUCTS = `SELECT "users"."name", "users"."email", "products".* FROM products INNER JOIN users ON "products"."u_id" = "users"."user_id";`;
 
-
 // const UPDATE_INVENTORY = `UPDATE "Product" SET "inventory" = "inventory" - `;
 
 // const UPDATE_SKU = ` WHERE "SKU"=`;

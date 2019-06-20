@@ -63,14 +63,20 @@ class AddProduct extends Component {
   */
   submitProduct() {
     //userId: this.props.userId
-    this.props.addProduct({
+    // this.props.addProduct({
+    //   u_id: this.props.userId,
+    //   prod_name: this.state.productName,
+    //   prod_desc: this.state.productDesc,
+    //   prod_price: this.state.productPrice,
+    //   img_url: this.state.imageURL
+    // });
+    this.props.sendProduct({
       u_id: this.props.userId,
       prod_name: this.state.productName,
       prod_desc: this.state.productDesc,
       prod_price: this.state.productPrice,
       img_url: this.state.imageURL
-    });
-
+    })
     document.getElementById("product-form").reset();
   }
 
@@ -142,7 +148,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addProduct: product => dispatch(actions.addProduct(product))
+  addProduct: product => dispatch(actions.addProduct(product)),
+  sendProduct: product => dispatch(actions.sendProduct(product))
 });
 
 export default connect(

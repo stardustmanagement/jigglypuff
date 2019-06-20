@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 import { connect } from "react-redux";
 
-import * as actions from '../actions/actions';
+import * as actions from "../actions/actions";
 
 const mapStateToProps = store => ({
   products: store.products.products,
   cart: store.products.cart,
-  sendPurchaseStatus: store.products.sendPurchaseStatus,
-})
+  sendPurchaseStatus: store.products.sendPurchaseStatus
+});
 
 const mapDispatchToProps = dispatch => ({
   exitCheckout: () => dispatch(actions.exitCheckout()),
-  purchase: (cart) => dispatch(actions.sendPurchase(cart)),
-})
+  purchase: cart => dispatch(actions.sendPurchase(cart))
+});
 
 function PurchaseModal(props) {
   let purchaseTotalPrice = 0;
@@ -26,26 +26,47 @@ function PurchaseModal(props) {
         <span> {product.product_name} </span>
         <span> ${productTotalPrice} </span>
       </li>
-    )
+    );
   });
   return (
     <div className="overlay">
       <div className="modal">
         <div id="checkoutModal">
-          <button onClick={props.exitCheckout}>Exit</button>
           <div id="checkoutSummary">
             <ul>
-              <li className="purchaseHeader"><span>Quantity</span><span>Description</span><span>Price</span></li>
+              <li className="purchaseHeader">
+                <span>Quantity</span>
+                <span>Description</span>
+                <span>Price</span>
+              </li>
               {products}
-              <li className="purchaseHeader"><span>Total:</span><span></span><span> $ {purchaseTotalPrice}</span></li>
+              <li className="purchaseHeader">
+                <span>Total:</span>
+                <span />
+                <span> $ {purchaseTotalPrice}</span>
+              </li>
             </ul>
           </div>
-          <a className='btn btn-blue' id='purchaseBtn' onClick={() => props.purchase(props.cart)}>Purchase</a>
-          <p style={{fontSize: '5em', fontWeight: 900, color: '#29293d'}} >{props.sendPurchaseStatus}</p>
+          <a
+            className="btn btn-blue"
+            id="purchaseBtn"
+            onClick={() => props.purchase(props.cart)}
+          >
+            Purchase
+          </a>
+          <button id="exitBtn" onClick={props.exitCheckout}>
+            Exit
+          </button>
+          <p style={{ fontSize: "5em", fontWeight: 900, color: "#29293d" }}>
+            {props.sendPurchaseStatus}
+          </p>
         </div>
       </div>
     </div>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PurchaseModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PurchaseModal);
