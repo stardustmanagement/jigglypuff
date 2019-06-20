@@ -7,6 +7,9 @@ const GET_ALL = `SELECT * FROM products;`;
 
 const GET_USER_PRODUCTS = `SELECT * FROM products INNER JOIN users ON users.user_id = products.u_id WHERE users.user_id=`;
 
+const GET_ALL_PRODUCTS = `SELECT "users"."name", "users"."email", "products".* FROM products INNER JOIN users ON "products"."u_id" = "users"."user_id";`;
+
+
 // const UPDATE_INVENTORY = `UPDATE "Product" SET "inventory" = "inventory" - `;
 
 // const UPDATE_SKU = ` WHERE "SKU"=`;
@@ -15,7 +18,7 @@ const productModel = {
   //returns all shoes from database
   getAll() {
     return new Promise((resolve, reject) => {
-      pool.query(GET_ALL, (err, result) => {
+      pool.query(GET_ALL_PRODUCTS, (err, result) => {
         if (err) return reject(err);
         resolve(result);
       });

@@ -17,6 +17,8 @@ class Product extends Component {
           <div>Item: {product.prod_name}</div>
           <div>Description: {product.prod_desc}</div>
           <div>$: {product.prod_price}</div>
+          <div>Seller: {product.name}</div>
+          <div>Contact Seller: {product.email}</div>
         </div>
         <button id="addtocart" onClick={() => this.props.addToCart(product.SKU)}> Add to Cart</button>
         <button id="subtractFromCart" onClick={() => this.props.subtractFromCart(product.SKU)}> Subtract from Cart</button>
