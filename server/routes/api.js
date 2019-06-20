@@ -18,6 +18,14 @@ router.get('/products/add', userCtrl.addNewProduct, (req, res) => {
   res.status(200).send('SUCCESSFUL ADD');
 });
 
+// Delete a product via "_id"
+// requires { "_id":INT_VALUE }
+router.get('/products/delete', userCtrl.deleteProduct, (req, res) => {
+  res.status(200).send('PRODUCT DELETED').catch(err => {
+    console.log(`there has been an error deleting.. ${err}`);
+    res.sendStatus(404);
+  })
+})
 // Get all products in specific category
 // router.get('/products/:category', productCtrl.getCategory, (req, res) => {
 //   res.status(200).json(res.locals.category)

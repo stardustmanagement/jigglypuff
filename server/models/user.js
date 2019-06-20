@@ -42,6 +42,18 @@ userModel = {
         resolve(result);
       });
     });
+  },
+  // delete's a user's product at _id
+  // will use "_id" (product id)
+  deleteProduct(body) {
+    const deleteItemQuery = `DELETE FROM public.products
+    WHERE "_id"=${body._id}`;
+    return new Promise((resolve, reject) => {
+      pool.query(deleteItemQuery, (err, result) => {
+        if (err) return reject(err);
+        resolve(result);
+      })
+    })
   }
 };
 

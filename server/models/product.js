@@ -9,6 +9,7 @@ const GET_USER_PRODUCTS = `SELECT * FROM products INNER JOIN users ON users.user
 
 const GET_ALL_PRODUCTS = `SELECT "users"."name", "users"."email", "products".* FROM products INNER JOIN users ON "products"."u_id" = "users"."user_id";`;
 
+
 // const UPDATE_INVENTORY = `UPDATE "Product" SET "inventory" = "inventory" - `;
 
 // const UPDATE_SKU = ` WHERE "SKU"=`;
@@ -29,6 +30,16 @@ const productModel = {
       pool.query(GET_USER_PRODUCTS + userId + ";", (err, result) => {
         if (err) return reject(err);
         resolve(result);
+      })
+    })
+  },
+  // should take product _id
+  // updates stock to true (stretch feature)
+  updateProductStock(_id) {
+    const updateProduct = `UPDATE products SET stock = 'true' WHERE _id='${_id}'`;
+    return new Promise((resolve, reject) => {
+      pool.query(updateProduct, (err, result) => {
+        resolve(reject);
       })
     })
   },
