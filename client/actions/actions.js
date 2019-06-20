@@ -102,3 +102,8 @@ export const sendProduct = (product) => dispatch => {
   })
   .catch(err => console.log(err));
 }
+
+export const addUser = (userId) => ({
+  type: types.ADD_USER,
+  payload: userId
+})

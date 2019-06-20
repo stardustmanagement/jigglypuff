@@ -8,9 +8,12 @@ const keys = require("./config/keys");
 const path = require("path");
 const bodyParser = require("body-parser");
 const routes = require("./routes/api");
+const cors = require('cors');
 const { PORT } = process.env;
 
 const pool = require("./pool");
+
+app.use(cors());
 
 app.use(
   cookieSession({
