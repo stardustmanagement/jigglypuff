@@ -22,8 +22,6 @@ router.post('/newproduct', userCtrl.addNewProduct, (req, res) => {
   res.status(200).send('SUCCESSFUL ADD');
 });
 
-
-
 // Get all products in specific category
 // router.get('/products/:category', productCtrl.getCategory, (req, res) => {
 //   res.status(200).json(res.locals.category)

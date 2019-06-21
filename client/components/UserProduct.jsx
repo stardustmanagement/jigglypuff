@@ -1,13 +1,13 @@
 /**
-* ************************************
-*
-* @module UserProduct.jsx
-* @author Stardust
-* @date 06/19/2019
-* @description Only renders the user's own products, allowing them to delete or edit (stretch) their own products.
-*
-* ************************************
-*/
+ * ************************************
+ *
+ * @module UserProduct.jsx
+ * @author Stardust
+ * @date 06/19/2019
+ * @description Only renders the user's own products, allowing them to delete or edit (stretch) their own products.
+ *
+ * ************************************
+ */
 
 import React, { Component } from "react";
 
