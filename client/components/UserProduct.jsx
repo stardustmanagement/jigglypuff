@@ -29,6 +29,7 @@ const UserProduct = props => {
           <div>Item: {product.prod_name}</div>
           <div>Description: {product.prod_desc}</div>
           <div>$: {product.prod_price}</div>
+          <button onClick={e => props.deleteProductAsync(product._id)}>Remove</button>
         </div>
       );
     });

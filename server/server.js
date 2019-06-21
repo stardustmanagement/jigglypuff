@@ -17,7 +17,7 @@ const pool = require("./pool");
 app.use(
   cors({
     origin: "true", // allow to server to accept request from different origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: "GET,POST,DELETE",
     credentials: true // allow session cookie from browser to pass through
   })
 );

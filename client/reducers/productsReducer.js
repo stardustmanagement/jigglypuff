@@ -1,4 +1,4 @@
-import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS, REQUEST_PRODUCTS_FAILURE, ADD_TO_CART, SUBTRACT_FROM_CART, PROCEED_TO_CHECKOUT, EXIT_CHECKOUT, ACCEPT_PURCHASE, REQUEST_PURCHASE, ADD_PRODUCT, ADD_USER } from '../constants/actionTypes';
+import { REQUEST_PRODUCTS, RECEIVE_PRODUCTS, REQUEST_PRODUCTS_FAILURE, ADD_TO_CART, SUBTRACT_FROM_CART, PROCEED_TO_CHECKOUT, EXIT_CHECKOUT, ACCEPT_PURCHASE, REQUEST_PURCHASE, ADD_PRODUCT, ADD_USER, DELETE_PRODUCT } from '../constants/actionTypes';
 
 const initialState = {
   products: [],
@@ -90,6 +90,15 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         userId: action.payload,
         isAuthenticated: true
+      }
+    case DELETE_PRODUCT:
+      console.log('REMOVING ID: ', action.payload);
+      let itemIndex = state.products.map(obj => obj._id).indexOf(action.payload);
+      let productsCopy = state.products.slice();
+      productsCopy.splice(itemIndex, 1);
+      return {
+        ...state,
+        products: productsCopy
       }
     default:
       return state;
