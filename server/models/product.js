@@ -9,6 +9,8 @@ const GET_USER_PRODUCTS = `SELECT * FROM products INNER JOIN users ON users.user
 
 const GET_ALL_PRODUCTS = `SELECT "users"."name", "users"."email", "products".* FROM products INNER JOIN users ON "products"."u_id" = "users"."user_id";`;
 
+const DELETE_USER_PRODUCT = `DELETE FROM products WHERE _id=`;
+
 // const UPDATE_INVENTORY = `UPDATE "Product" SET "inventory" = "inventory" - `;
 
 // const UPDATE_SKU = ` WHERE "SKU"=`;
@@ -32,6 +34,17 @@ const productModel = {
       })
     })
   },
+
+  deleteProduct(prodId){
+    console.log('in product model to delete')
+    return new Promise((resolve, reject) => {
+      pool.query(DELETE_USER_PRODUCT + prodId + ";" , (err, result) => {
+        if(err) return reject(err);
+        resolve(result);
+      })
+    })
+  },
+
   //takes in cart obj with keys of SKU number and values of the quantities bought of each
   updateInventory(cart) {
     return new Promise((resolve, reject) => {

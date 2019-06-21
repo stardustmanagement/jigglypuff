@@ -8,10 +8,14 @@ router.get('/products', productCtrl.getAllProducts, (req, res) => {
   res.status(200).json(res.locals.products)
 });
 
-//Get all products published by a specific user (if id is sent as part of query string)
-router.get('/products/:userId', productCtrl.getUserProducts, (req, res) => {
-  res.status(200).json(res.locals.products);
+router.delete('/deleteProduct', productCtrl.deleteProduct, (req, res) => {
+  res.status(200).send('DELETE SUCCESSFUL');
 });
+
+//Get all products published by a specific user (if id is sent as part of query string)
+// router.get('/products/:userId', productCtrl.getUserProducts, (req, res) => {
+//   res.status(200).json(res.locals.products);
+// });
 
 //Add product to database
 router.post('/newproduct', userCtrl.addNewProduct, (req, res) => {

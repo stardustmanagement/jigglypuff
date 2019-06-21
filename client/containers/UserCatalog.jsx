@@ -24,7 +24,7 @@ class UserCatalog extends Component {
     return (
       <div>
         <h1>Your Products</h1>
-        <UserProduct products={this.props.products} userId={this.props.userId} />
+        <UserProduct deleteProductAsync={this.props.deleteProductAsync} products={this.props.products} userId={this.props.userId} />
       </div>
     );
   }
@@ -36,7 +36,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  
+  deleteProductAsync: (prodId) => dispatch(actions.deleteProductAsync(prodId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserCatalog);

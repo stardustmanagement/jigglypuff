@@ -14,22 +14,32 @@ import React, { Component } from "react";
 const UserProduct = props => {
   //NOTE: ADD ACTION CREATOR TO DELETE THIS PRODUCT FROM STORE
   //HTTP: DELETE REQUEST PASSING ITEM'S PRODUCT ID
-
+  console.log('In User Catalog', props.products);
   //Render products published by current user
   const filteredUserProducts = props.products
-    .filter(product => product.userId === props.userId)
+    .filter(product => product.u_id === props.userId)
     .map((product, idx) => {
       return (
         <div key={idx}>
-          <img src={product.imageURL} width="45%" height="45%" />
-          <div>Item: {product.productName}</div>
-          <div>Description: {product.productDesc}</div>
-          <div>$: {product.productPrice}</div>
+          <img
+            src={product.img_url}
+            width="45%"
+            height="45%"
+          />
+          <div>Item: {product.prod_name}</div>
+          <div>Description: {product.prod_desc}</div>
+          <div>$: {product.prod_price}</div>
+          <button onClick={e => props.deleteProductAsync(product._id)}>Remove</button>
         </div>
       );
     });
-
-  return <div>{filteredUserProducts}</div>;
+  
+    console.log(filteredUserProducts);
+  return (
+    <div>
+      {filteredUserProducts}
+    </div>
+  );
 };
 
 export default UserProduct;

@@ -37,6 +37,17 @@ productCtrl.getUserProducts = (req, res, next) => {
     });
 };
 
+productCtrl.deleteProduct = (req, res, next) => {
+  console.log('In product controller to delete')
+  Product.deleteProduct(req.body)
+    .then(result => {
+      next();
+    })
+    .catch(err => {
+      return next(err);
+    });
+}
+
 /**
  * updateItems - updates items on the database based on purchases
  
