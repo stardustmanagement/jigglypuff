@@ -17,7 +17,7 @@ function Header(props) {
   return (
     <div>
       <div className='header-left'>
-        <h1 className='title'>KIM's Convenience</h1>
+        <h1 className='title'>Stardust E-Commerce</h1>
       </div>
       <header>
         <div className='header-right'>
