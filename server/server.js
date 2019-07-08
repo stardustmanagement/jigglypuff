@@ -18,7 +18,8 @@ app.use(
   cors({
     origin: "true", // allow to server to accept request from different origin
     methods: "GET,POST,DELETE",
-    credentials: true // allow session cookie from browser to pass through
+    credentials: true,
+     // allow session cookie from browser to pass through
   })
 );
 

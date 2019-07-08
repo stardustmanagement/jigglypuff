@@ -106,6 +106,11 @@ export const addUser = (userId) => ({
   payload: userId
 })
 
+export const deleteProduct = (prodId) => ({
+  type: types.DELETE_PRODUCT,
+  payload: prodId
+})
+
 export const deleteProductAsync = (prodId) => dispatch => {
   console.log('Deleting...', prodId);
   return fetch('/api/deleteProduct', {
@@ -119,8 +124,4 @@ export const deleteProductAsync = (prodId) => dispatch => {
   .catch(err => console.log(err));
 }
 
-export const deleteProduct = (prodId) => ({
-  type: types.DELETE_PRODUCT,
-  payload: prodId
-})
 
